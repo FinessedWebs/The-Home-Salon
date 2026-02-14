@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Home Salon - Quote Generator</title>
+  <style>
+    :root {
+      --first-color: #2e4734;
+      --gradient-color: linear-gradient(90deg, #2e4734, #bfa56a);
+      --title-color: #bfa56a;
+      --text-color: #2e4734;
+      --white-color: #e8e3d8;
+      --body-color: #e8e3d8;
+      --accent-color: #ffcc00;
+      --surface: #ffffff;
+      --line: #d7d0c4;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text-color);
+      background: radial-gradient(circle at top, #f3efe7 0%, var(--body-color) 45%, #ddd3c1 100%);
+      min-height: 100vh;
+      padding: 1.5rem;
+    }
+
+    .page {
+      max-width: 1050px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(46, 71, 52, 0.12);
+    }
+
+    .topbar {
+      background: var(--gradient-color);
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+    }
+
+    .topbar a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .wrap {
+      padding: 1.5rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .quote-header {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 1rem;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fffdf8;
+    }
+
+    .brand {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .brand img {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.25rem;
+    }
+
+    h1 {
+      color: var(--first-color);
+      font-size: 1.35rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 1rem;
+      background: #fff;
+    }
+
+    .card h2 {
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      color: var(--first-color);
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      margin-bottom: 0.2rem;
+      color: var(--text-color);
+    }
+
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid #c8bea9;
+      border-radius: 8px;
+      padding: 0.55rem 0.6rem;
+      font: inherit;
+      color: var(--text-color);
+      background: #fff;
+    }
+
+    textarea {
+      min-height: 96px;
+      resize: vertical;
+    }
+
+    .items {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+
+    .items th, .items td {
+      border: 1px solid var(--line);
+      padding: 0.45rem;
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    .items th {
+      background: #f7f3ea;
+      color: var(--first-color);
+      font-size: 0.85rem;
+    }
+
+    .items input {
+      border: 1px solid #d5ccb9;
+      border-radius: 6px;
+      padding: 0.4rem 0.45rem;
+      width: 100%;
+      min-width: 70px;
+    }
+
+    .right {
+      text-align: right;
+    }
+
+    .sum {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.5rem 1rem;
+      max-width: 360px;
+      margin-left: auto;
+      margin-top: 0.75rem;
+    }
+
+    .sum strong {
+      color: var(--first-color);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    button {
+      border: 0;
+      border-radius: 8px;
+      padding: 0.65rem 1rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      background: var(--gradient-color);
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: #f0e8d8;
+      color: var(--first-color);
+      border: 1px solid #d7ccb4;
+    }
+
+    .remove-row {
+      background: #f7d9d9;
+      color: #7a2121;
+      border: 1px solid #efb8b8;
+      width: 100%;
+    }
+
+    .signature {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 0.5rem;
+      align-items: end;
+    }
+
+    .line {
+      margin-top: 0.5rem;
+      border-top: 1px solid #5e5a53;
+      padding-top: 0.25rem;
+      font-size: 0.85rem;
+    }
+
+    .help {
+      font-size: 0.82rem;
+      opacity: 0.8;
+      margin-top: 0.35rem;
+    }
+
+    @media screen and (max-width: 860px) {
+      .quote-header,
+      .grid,
+      .signature {
+        grid-template-columns: 1fr;
+      }
+      .meta-grid {
+        grid-template-columns: 1fr;
+      }
+      .items {
+        font-size: 0.85rem;
+      }
+    }
+
+    @media print {
+      @page {
+        size: A4;
+        margin: 12mm;
+      }
+
+      body {
+        background: #fff;
+        padding: 0;
+      }
+
+      .wrap {
+        padding: 0;
+        gap: 0.55rem;
+      }
+
+      .page {
+        max-width: none;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        overflow: visible;
+      }
+
+      .topbar,
+      .actions,
+      .remove-row {
+        display: none !important;
+      }
+
+      .quote-header,
+      .card,
+      .sum,
+      .grid--final,
+      .items tr {
+        break-inside: avoid-page;
+        page-break-inside: avoid;
+      }
+
+      input, textarea, select {
+        border: 0;
+        padding: 0;
+        background: transparent;
+        appearance: none;
+      }
+
+      #termsText {
+        min-height: 120px;
+        height: auto !important;
+        overflow: visible;
+        white-space: pre-wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page" id="quote-document">
+    <div class="topbar">
+      <div>Quote Generator</div>
+      <a href="index.html">Back to Website</a>
+    </div>
+
+    <div class="wrap">
+      <section class="quote-header">
+        <div class="brand">
+          <img src="Logos/The Home Salon Logo green.png" alt="The Home Salon logo">
+          <div>
+            <h1>The Home Salon</h1>
+            <p>Custom Furnishing and Renovation Solutions</p>
+            <p>Tel: +27 69 933 2085 | Email: thehomesalon1@gmail.com</p>
+          </div>
+        </div>
+        <div class="meta-grid">
+          <div>
+            <label for="quoteNo">Quote Number</label>
+            <input id="quoteNo" type="text">
+          </div>
+          <div>
+            <label for="quoteDate">Quote Date</label>
+            <input id="quoteDate" type="date">
+          </div>
+          <div>
+            <label for="validUntil">Valid Until</label>
+            <input id="validUntil" type="date">
+          </div>
+          <div>
+            <label for="currency">Currency</label>
+            <select id="currency">
+              <option value="ZAR" selected>ZAR (R)</option>
+              <option value="USD">USD ($)</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid">
+        <div class="card">
+          <h2>Client Details</h2>
+          <label for="clientName">Client Name</label>
+          <input id="clientName" type="text" placeholder="Client full name">
+          <label for="clientPhone">Phone</label>
+          <input id="clientPhone" type="text" placeholder="+27 ...">
+          <label for="clientEmail">Email</label>
+          <input id="clientEmail" type="email" placeholder="name@email.com">
+          <label for="clientAddress">Address</label>
+          <textarea id="clientAddress" placeholder="Street, suburb, city"></textarea>
+        </div>
+
+        <div class="card">
+          <h2>Project Information</h2>
+          <label for="projectTitle">Project Title</label>
+          <input id="projectTitle" type="text" placeholder="Kitchen Unit / Renovation">
+          <label for="projectRef">Reference</label>
+          <input id="projectRef" type="text" placeholder="Optional internal reference">
+          <label for="scope">Scope / Notes</label>
+          <textarea id="scope" placeholder="Short summary of the work and deliverables"></textarea>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Quotation Items</h2>
+        <table class="items" id="itemsTable">
+          <thead>
+            <tr>
+              <th style="width:44%">Description</th>
+              <th style="width:12%">Qty</th>
+              <th style="width:16%">Unit Price</th>
+              <th style="width:16%">Line Total</th>
+              <th style="width:12%">Action</th>
+            </tr>
+          </thead>
+          <tbody id="itemRows"></tbody>
+        </table>
+
+        <div class="actions" style="margin-top:0.75rem;">
+          <button class="btn-secondary" id="addItemBtn" type="button">Add Item</button>
+        </div>
+
+        <div class="sum">
+          <span>Subtotal</span><strong id="subtotalValue">R0.00</strong>
+          <span>Discount</span><input id="discountInput" type="number" min="0" step="0.01" value="0">
+          <span>Tax (%)</span><input id="taxInput" type="number" min="0" step="0.01" value="0">
+          <span><strong>Total</strong></span><strong id="totalValue">R0.00</strong>
+        </div>
+      </section>
+
+      <section class="grid grid--final">
+        <div class="card">
+          <h2>Terms</h2>
+          <textarea id="termsText">1. Quote valid for 14 days from issue date.
+2. 70% deposit required before work starts.
+3. Final payment due upon completion and handover.</textarea>
+        </div>
+        <div class="card">
+          <h2>Signed By</h2>
+          <label for="signedBy">Signed by (Name)</label>
+          <input id="signedBy" type="text" placeholder="Name of person signing">
+          <label for="signDate">Signature Date</label>
+          <input id="signDate" type="date"><br><br><br>
+          <div class="line">Signature</div>
+          <p class="help">This name is printed on the downloaded quote so the recipient can sign.</p>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button class="btn-primary" id="downloadBtn" type="button">Download Quote (PDF)</button>
+        <button class="btn-secondary" id="resetBtn" type="button">Reset Totals</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const itemRows = document.getElementById('itemRows');
+    const addItemBtn = document.getElementById('addItemBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const subtotalValue = document.getElementById('subtotalValue');
+    const totalValue = document.getElementById('totalValue');
+    const taxInput = document.getElementById('taxInput');
+    const discountInput = document.getElementById('discountInput');
+    const currencyInput = document.getElementById('currency');
+
+    const quoteNo = document.getElementById('quoteNo');
+    const quoteDate = document.getElementById('quoteDate');
+    const validUntil = document.getElementById('validUntil');
+    const signDate = document.getElementById('signDate');
+
+    function formatMoney(value) {
+      const c = currencyInput.value;
+      const symbol = c === 'USD' ? '$' : 'R';
+      return symbol + Number(value).toFixed(2);
+    }
+
+    function createRow(description = '', qty = 1, unitPrice = 0) {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><input type="text" class="desc" placeholder="Item description" value="${description}"></td>
+        <td><input type="number" class="qty" min="0" step="1" value="${qty}"></td>
+        <td><input type="number" class="price" min="0" step="0.01" value="${unitPrice}"></td>
+        <td class="right line-total">${formatMoney(0)}</td>
+        <td><button type="button" class="remove-row">Remove</button></td>
+      `;
+
+      tr.querySelector('.qty').addEventListener('input', updateTotals);
+      tr.querySelector('.price').addEventListener('input', updateTotals);
+      tr.querySelector('.remove-row').addEventListener('click', () => {
+        tr.remove();
+        updateTotals();
+      });
+
+      itemRows.appendChild(tr);
+      updateTotals();
+    }
+
+    function updateTotals() {
+      const rows = itemRows.querySelectorAll('tr');
+      let subtotal = 0;
+
+      rows.forEach((row) => {
+        const qty = Number(row.querySelector('.qty').value) || 0;
+        const price = Number(row.querySelector('.price').value) || 0;
+        const line = qty * price;
+        subtotal += line;
+        row.querySelector('.line-total').textContent = formatMoney(line);
+      });
+
+      const discount = Number(discountInput.value) || 0;
+      const tax = Number(taxInput.value) || 0;
+      const taxable = Math.max(subtotal - discount, 0);
+      const total = taxable + (taxable * (tax / 100));
+
+      subtotalValue.textContent = formatMoney(subtotal);
+      totalValue.textContent = formatMoney(total);
+    }
+
+    function setDefaultDates() {
+      const now = new Date();
+      const quoteDateStr = now.toISOString().slice(0, 10);
+      const valid = new Date(now);
+      valid.setDate(valid.getDate() + 14);
+      const validStr = valid.toISOString().slice(0, 10);
+
+      const ref = String(now.getTime()).slice(-5);
+      quoteNo.value = 'THS-' + now.toISOString().slice(0, 10).replaceAll('-', '') + '-' + ref;
+      quoteDate.value = quoteDateStr;
+      validUntil.value = validStr;
+      signDate.value = quoteDateStr;
+    }
+
+    addItemBtn.addEventListener('click', () => createRow('', 1, 0));
+    taxInput.addEventListener('input', updateTotals);
+    discountInput.addEventListener('input', updateTotals);
+    currencyInput.addEventListener('change', updateTotals);
+
+    downloadBtn.addEventListener('click', () => {
+      updateTotals();
+      window.print();
+    });
+
+    resetBtn.addEventListener('click', () => {
+      taxInput.value = 0;
+      discountInput.value = 0;
+      updateTotals();
+    });
+
+    setDefaultDates();
+    createRow('Custom kitchen unit fabrication', 1, 0);
+    createRow('Installation and finishing', 1, 0);
+  </script>
+</body>
+</html>

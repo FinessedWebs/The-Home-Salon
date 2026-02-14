@@ -136,7 +136,7 @@
                 <a href="T&C.html"></a>
             </div>
             <div class="company">
-                <a href="index.html" class="logo"><img src="img/The Home Salon Logo Cream White.jpg" alt="logo" height="px"></a>
+                <a href="index.html" class="logo" id="secret-quote-link"><img src="img/The Home Salon Logo Cream White.jpg" alt="logo" height="px"></a>
                 <div class="social-links">
                     <a href="https://www.tiktok.com/@thehomesalon?_t=ZS-8zMiXer3ApR&_r=1" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
                         <a href="https://www.facebook.com/profile.php?id=61559724226163" target="_blank"><i class="fab fa-facebook"></i></a>
@@ -155,6 +155,34 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" integrity="sha512-Q1hC+QIoI+GyYoSCG8jy68c6JHtHsQep5MNxjV5Or9+cogoe8yb1O14jOVUIU7EfBZaJISQGSZ3hEjHB0siUrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
  <!--=============== MAIN JS ===============-->
  <script src="main.js"></script>
+ <script>
+    (function () {
+        const logoLink = document.getElementById('secret-quote-link');
+        if (!logoLink) return;
+
+        let clickCount = 0;
+        let timerId = null;
+        const windowMs = 900;
+
+        logoLink.addEventListener('click', function (event) {
+            event.preventDefault();
+            clickCount += 1;
+
+            if (timerId) {
+                clearTimeout(timerId);
+            }
+
+            if (clickCount >= 4) {
+                window.location.href = 'quote.html';
+                return;
+            }
+
+            timerId = setTimeout(function () {
+                window.location.href = 'index.html';
+            }, windowMs);
+        });
+    })();
+ </script>
 </body>
 </html>
 

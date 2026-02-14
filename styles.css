@@ -299,6 +299,26 @@ I
   
 }
 
+/* Target mobile layout for 412px-wide devices */
+@media screen and (max-width: 412px) {
+  .workerBackground {
+    background-image: url('img/mobile_background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    min-height: 100dvh;
+    height: 914px;
+  }
+
+  .home__container {
+    height: auto;
+    min-height: calc(100dvh - var(--header-height));
+    padding-top: 6rem;
+    padding-bottom: 2rem;
+  }
+}
+
 /* For taller devices */
 @media screen and (min-width: 376px) and (min-height: 800px){
   .home__container{
