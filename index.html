@@ -75,50 +75,13 @@
         </section>
     </main>
    </div>
+   <a href="#" class="scrollup" id="scroll-up" aria-label="Scroll to top">
+    <i class="ri-arrow-up-line"></i>
+   </a>
 
     <!--=============== MAIN JS ===============-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-    <script>
-        /*=============== SHOW MENU ===============*/
-        const navMenu = document.getElementById('nav-menu'),
-            navToggle = document.getElementById('nav-toggle'),
-            navClose = document.getElementById('nav-close');
-
-        /*===== MENU SHOW =====*/
-        if (navToggle) {
-            navToggle.addEventListener('click', () => {
-                navMenu.classList.add('show-menu');
-            });
-        }
-
-        /*===== MENU HIDDEN =====*/
-        if (navClose) {
-            navClose.addEventListener('click', () => {
-                navMenu.classList.remove('show-menu');
-            });
-        }
-
-        /*=============== REMOVE MENU MOBILE ===============*/
-        const navLink = document.querySelectorAll('.nav__link');
-
-        const linkAction = () => {
-            const navMenu = document.getElementById('nav-menu');
-            // When we click on each nav__link, we remove the show-menu class
-            navMenu.classList.remove('show-menu');
-        };
-
-        navLink.forEach(n => n.addEventListener('click', linkAction));
-
-        /*=============== CHANGE BACKGROUND HEADER ===============*/
-        const bgHeader = () => {
-            const header = document.getElementById('header');
-            // When the scroll is greater than 50 viewport height, add the bg-header class
-            this.scrollY >= 50 ? header.classList.add('bg-header') : header.classList.remove('bg-header');
-        };
-
-        window.addEventListener('scroll', bgHeader);
-
-        /*=============== GSAP ANIMATION ===============*/
-        gsap.from('.home__data', { opacity: 0, y: -60, duration: 1.2, delay: 1 });
-    </script></body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="js/main.js"></script>
+</body>
 </html>

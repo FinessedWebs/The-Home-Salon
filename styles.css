@@ -167,6 +167,11 @@ header{
   .nav__link:hover{  
     color: var(--first-color);
   }
+
+  .active-link {
+    color: var(--first-color);
+    font-weight: var(--font-semi-bold);
+  }
   
   .nav__buttons{
     display: flex;
@@ -208,6 +213,33 @@ header{
   box-shadow: 0 1px 16px hsla(210, 55%, 24%, .12);
 }
 
+/* Scroll up button */
+.scrollup {
+  position: fixed;
+  right: 1.25rem;
+  bottom: -4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.75rem;
+  background: var(--gradient-color);
+  color: var(--white-color);
+  font-size: 1.25rem;
+  box-shadow: 0 8px 20px hsla(210, 55%, 24%, 0.25);
+  z-index: var(--z-tooltip);
+  transition: bottom 0.3s ease, transform 0.2s ease;
+}
+
+.scrollup:hover {
+  transform: translateY(-3px);
+}
+
+.show-scroll {
+  bottom: 2rem;
+}
+
 /*=============== HOME ===============*/
  
 .home{ 
@@ -217,8 +249,6 @@ header{
 .home__container{ 
   padding-top: 8rem; height: 100vh;
 }
-
-I
 
 .home__content{ 
   position: relative;
