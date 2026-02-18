@@ -1,5 +1,5 @@
 /*=============== GOOGLE FONTS ===============*/
-@import url("https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Poppins:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700&display=swap");
 
 /*=============== VARIABLES CSS ===============*/
 :root {
@@ -16,12 +16,15 @@
 --white-color: #e8e3d8; /* Cream White */
 --body-color: #e8e3d8; /* Cream White */
 --accent-color: #FFCC00; /* Gold - 10% */
+--surface-border: rgba(191, 165, 106, 0.25);
+--shadow-sm: 0 8px 24px rgba(46, 71, 52, 0.08);
+--shadow-md: 0 14px 36px rgba(46, 71, 52, 0.14);
 
 
   /*========== Font and typography ==========*/
   /*.5rem = 8px | 1rem = 16px ...*/
-  --body-font: "Poppins", sans-serif;
-  --second-font: "Lora", serif;
+  --body-font: "Manrope", sans-serif;
+  --second-font: "Cormorant Garamond", serif;
   --biggest-font-size: 2.25rem;
   --normal-font-size: .938rem;
   --small-font-size: .813rem;
@@ -61,6 +64,21 @@ body {
   background-color: var(--body-color);
   color: var(--text-color);
   scroll-behavior: smooth;
+  line-height: 1.65;
+  position: relative;
+  isolation: isolate;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 20% 15%, rgba(191, 165, 106, 0.09), transparent 45%),
+    radial-gradient(circle at 85% 75%, rgba(46, 71, 52, 0.08), transparent 42%),
+    linear-gradient(rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.07));
 }
 
 ul {
@@ -240,6 +258,46 @@ header{
   bottom: 2rem;
 }
 
+.mobile-cta {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .mobile-cta {
+    position: fixed;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: calc(var(--z-fixed) + 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    border-radius: 999px;
+    border: 1px solid var(--surface-border);
+    background: rgba(232, 227, 216, 0.92);
+    backdrop-filter: blur(8px);
+    color: var(--first-color);
+    font-weight: var(--font-semi-bold);
+    box-shadow: var(--shadow-md);
+    transition: transform .2s ease, opacity .25s ease;
+  }
+
+  .mobile-cta:active {
+    transform: scale(0.99);
+  }
+
+  .mobile-cta.mobile-cta--hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px);
+  }
+
+  .show-scroll {
+    bottom: 4.5rem;
+  }
+}
+
 /*=============== HOME ===============*/
  
 .home{ 
@@ -270,6 +328,7 @@ header{
     font-size: var(--biggest-font-size);
     font-family: var(--second-font);
     color: var(--title-color);
+    letter-spacing: .4px;
 }
 
 .home__description{
@@ -283,7 +342,14 @@ header{
   width: max-content;
   padding: 1rem 2rem;
   border-radius: .75rem;
-  box-shadow: 0 24px 32px hsla(210, 54%, 24);
+  box-shadow: var(--shadow-sm);
+  transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+}
+
+.home__button:hover{
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  filter: saturate(1.05);
 }
 
 .home__bird-1,
@@ -623,7 +689,8 @@ header{
   padding: 1rem;
   background-color: var(--white-color);
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow effect */
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow-sm); /* Light shadow effect */
 }
 
 .review-content {
@@ -829,7 +896,8 @@ header{
   background-color: var(--white-color);
   padding: 1.5rem;
   border-radius: .75rem;
-  box-shadow: 0 8px 16px hsla(0, 0%, 0%, 0.1);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow-sm);
   transition: transform .3s ease-in-out, box-shadow .3s ease-in-out;
 }
 
@@ -1085,6 +1153,8 @@ header{
   padding: 1rem;
   background: var(--white-color);
   border-radius: 0.5rem;
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow-sm);
   
 }
 
@@ -1128,7 +1198,8 @@ header{
   width: 30%;
   background: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow-sm);
   padding: 20px;
 }
 
