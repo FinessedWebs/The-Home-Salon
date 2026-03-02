@@ -323,6 +323,7 @@
             <h1>The Home Salon</h1>
             <p>Custom Furnishing and Renovation Solutions</p>
             <p>Tel: +27 69 933 2085 | Email: thehomesalon1@gmail.com</p>
+            <p>THS Registration Number: 2025/001606/07</p>
           </div>
         </div>
         <div class="meta-grid">
@@ -509,6 +510,25 @@
 
     downloadBtn.addEventListener('click', () => {
       updateTotals();
+
+      const canMaskPrintUrl =
+        window.location.origin === 'the-homesalon.com' &&
+        window.location.pathname.endsWith('/quote.html');
+      const originalUrl =
+        window.location.pathname + window.location.search + window.location.hash;
+
+      if (canMaskPrintUrl) {
+        window.history.replaceState(null, '', '/');
+      }
+
+      const restoreUrl = () => {
+        if (canMaskPrintUrl) {
+          window.history.replaceState(null, '', originalUrl);
+        }
+        window.removeEventListener('afterprint', restoreUrl);
+      };
+
+      window.addEventListener('afterprint', restoreUrl);
       window.print();
     });
 
